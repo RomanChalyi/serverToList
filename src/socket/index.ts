@@ -25,7 +25,7 @@ export const socket = (socket) => {
       }
     });
   });
-
+  //
   socket.on("update tasks", (token) => {
     const { id } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const indexConnectedUser = connectedUsers.findIndex(
