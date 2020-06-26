@@ -1,5 +1,4 @@
 import Router from "koa-router";
-import jwtMiddleware from "koa-jwt";
 import {
   getWithStatus,
   create,
@@ -7,15 +6,14 @@ import {
   deleteWithId,
   deleteWithIds,
   updateTaskStatusWithIds,
+  checkToken,
 } from "../../middleware";
-import { JWT_SECRET } from "../../constant/base";
 
 const router: any = new Router();
 
-// router.use(jwtMiddleware({ secret: JWT_SECRET }));
-router.get("/tasks", getWithStatus);
+router.get("/tasks", checkToken, getWithStatus);
 
-router.post("/task", create);
+router.post("/task", checkToken, create);
 
 router.put("/task", update);
 router.put("/tasks", updateTaskStatusWithIds);

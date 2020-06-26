@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import _idAsId from "meanie-mongoose-to-json";
 import uniqueValidator from "mongoose-unique-validator";
 
-const UsersSchema = new Schema(
+const usersSchema = new Schema(
   {
     login: {
       type: String,
@@ -13,14 +13,15 @@ const UsersSchema = new Schema(
       type: String,
       required: true,
     },
-    refreshToken: {
-      type: String,
-      required: "server error, please try again later",
+
+    tokens: {
+      type: Array,
+      default: [],
     },
   },
   { versionKey: false }
 );
-UsersSchema.plugin(_idAsId);
-UsersSchema.plugin(uniqueValidator);
+usersSchema.plugin(_idAsId);
+usersSchema.plugin(uniqueValidator);
 
-export default model("users", UsersSchema);
+export default model("users", usersSchema);

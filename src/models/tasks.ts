@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { DONE, ACTIVE } from "../constant/status";
 import _idAsId from "meanie-mongoose-to-json";
 
-const TaskSchema = new Schema(
+const taskSchema = new Schema(
   {
     value: {
       type: String,
@@ -14,9 +14,14 @@ const TaskSchema = new Schema(
       default: ACTIVE,
       enum: [ACTIVE, DONE],
     },
+
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false }
 );
-TaskSchema.plugin(_idAsId);
+taskSchema.plugin(_idAsId);
 
-export default model("tasks", TaskSchema);
+export default model("tasks", taskSchema);
