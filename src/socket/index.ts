@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 const connectedUsers = [];
 
 export const socket = (socket) => {
+  console.log(connectedUsers, "socketIDs");
   socket.on("user logged in", (token) => {
     const { id } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const indexConnectedUser = connectedUsers.findIndex(
@@ -25,7 +26,7 @@ export const socket = (socket) => {
       }
     });
   });
-  //
+
   socket.on("update tasks", (token) => {
     const { id } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const indexConnectedUser = connectedUsers.findIndex(
@@ -34,6 +35,7 @@ export const socket = (socket) => {
 
     connectedUsers[indexConnectedUser].socketIDs.forEach((socketId) => {
       if (socketId !== socket.id) {
+        console.log("event, +++++++++++++");
         socket.to(socketId).emit("load tasks");
       }
     });

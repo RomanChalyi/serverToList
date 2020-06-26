@@ -18,6 +18,7 @@ const getWithStatus = async (ctx: any) => {
       ...statusTask,
       userId: ctx.userId,
     });
+
     return getResponse({
       ctx,
       result: { tasks, totalElements, limit, offset: page, filter: status },
