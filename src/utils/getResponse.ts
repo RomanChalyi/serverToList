@@ -29,7 +29,7 @@ export const getBadResponse = ({
 }: GetBadResponseParams): typeof ctx => {
   ctx.status = status ? status : err.status || 500;
   const msg = message ? message : err.message || "Bad Request";
-  console.log(msg, "msg");
+
   ctx.body = { message: msg };
   ctx.app.emit("error", err, ctx);
   return ctx;
